@@ -26,10 +26,11 @@ export default function (options) {
             dirPath = dirPath.split(sep).join('.') + '.'
             dirPath = dirPath.replace(/\.\./ig, '.')
         }
-
+        
         return {
             url: item.url,
             method: item.method,
+            filePath: join(item.filePath, `${item.fileName}.js`),
             middleware: `${dirPath}${item.fileName}.${item.action}`
         }
     })

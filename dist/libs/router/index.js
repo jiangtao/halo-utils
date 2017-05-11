@@ -32,6 +32,7 @@ exports.default = function (options) {
         return {
             url: item.url,
             method: item.method,
+            filePath: (0, _path.join)(item.filePath, `${item.fileName}.js`),
             middleware: `${dirPath}${item.fileName}.${item.action}`
         };
     });

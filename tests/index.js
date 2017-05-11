@@ -2,7 +2,9 @@ import test from 'ava'
 import { generateRouterMaps } from '../src'
 
 test('generateRouterMaps', (t) => {
-    t.deepEqual(generateRouterMaps({ dir: './tests/router' }), [{
+    t.deepEqual(generateRouterMaps({
+        dir: './tests/router'
+    }).map((item) => ({ url: item.url, method: item.method, middleware: item.middleware })), [{
         url: '/test',
         method: 'get',
         middleware: 'deep.index.action'

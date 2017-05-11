@@ -9,7 +9,7 @@ export default function (options) {
         files: []
     }, options)
 
-    if (!options.files.length) {
+    if (!options.files.length) {        
         return result
     }
 
