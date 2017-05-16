@@ -28,6 +28,7 @@ test('generateRouterMaps, dir exist, but empty directory', (t) => {
 })
 
 test('required rule', (t) => {
+    t.is(rule.getRule('required').exec(0), true)
     t.is(rule.getRule('required').exec(1), true)
     t.is(rule.getRule('required').exec('a'), true)
     t.is(rule.getRule('required').exec(''), false)

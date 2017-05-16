@@ -15,6 +15,10 @@ addRule('required', (val, rule) => {
         return true
     }
 
+    if (val === 0) {
+        return true
+    }
+
     return typeof val === 'string' ? val.trim() : val
 }, '请输入{{text}}')
 
