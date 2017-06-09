@@ -1,7 +1,6 @@
 import { parse } from 'babylon'
-import  glob  from 'glob'
+import glob from 'glob'
 import { readFile } from 'fs'
-import { promisify } from 'util'
 
 export async function getPaths(src) {
     return await promisify(glob)(`${src}/**/*.js`, { realpath: true })
@@ -10,6 +9,20 @@ export async function getPaths(src) {
 export async function getApiInfo(path) {
     let content = await getContent(path)
     return getDecoratorsInfo(getDecorators(parseCodeToAst(content)))
+}
+
+export function promisify(fn) {
+    return (...args) => {
+        return new Promise((resolve, reject) => {
+            return fn.apply(fn, [...args, (err, res) => {
+                if(err) {
+                    reject(err)
+                    return
+                }
+                resolve(res)
+            }])
+        })
+    }
 }
 
 async function getContent(path) {

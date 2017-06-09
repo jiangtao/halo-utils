@@ -1,6 +1,5 @@
 import { isAbsolute, resolve, join, relative } from 'path'
-import { getPaths, getApiInfo } from './utils'
-import { promisify } from 'util'
+import { getPaths, getApiInfo, promisify } from './utils'
 
 import marked from './marked'
 import { writeFile } from 'fs'
