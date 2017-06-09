@@ -16,7 +16,7 @@ export default function (options) {
     for (let file of options.files) {
         result = [...result, ...getRouterInfos(file, parseCodeToAst(fs.readFileSync(file)))]
     }
-
+    
     return result
 }
 
