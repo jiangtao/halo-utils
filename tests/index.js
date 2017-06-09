@@ -122,14 +122,14 @@ test('repeat rule, silent options', (t) => {
     t.is(rule.getRule('number').exec('ab'), false)
 })
 
-test('doc, get doc content', async t => {
+test('doc, get doc content', async function (t) {
     let content = await doc.getContent('./tests/router/doc')
     t.is(content.indexOf('/api/books') > -1, true)
     t.is(content.indexOf('POST') > -1, true)
     t.is(content.indexOf('required') > -1, true)
 })
 
-test('doc, write doc content', async t => {
+test('doc, write doc content', async function (t) {
     let content, apiDoc
 
     apiDoc = './api.md'
