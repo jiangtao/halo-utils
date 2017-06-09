@@ -1,6 +1,6 @@
 import test from 'ava'
 import { rule, generateRouterMaps, doc } from '../src'
-import { existsSync, unlinkSync } from 'fs'
+import { existsSync, unlinkSync, readFileSync } from 'fs'
 import { resolve, join } from 'path'
 import { promisify } from 'util'
 
@@ -137,7 +137,9 @@ test('doc, write doc content', async function (t) {
 
     await doc.writeContent(apiDoc, content)
     apiDoc = resolve(join(process.cwd(), apiDoc))
-
+    
     t.is(existsSync(apiDoc), true)
+    t.is(readFileSync(apiDoc).indexOf('/api/books') > -1, true)
+    readFileSync(apiDoc)
     unlinkSync(apiDoc)
 })
