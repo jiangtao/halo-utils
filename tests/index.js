@@ -16,6 +16,10 @@ test('generateRouterMaps', (t) => {
         middleware: "doc.index.getBooks",
         url: "/api/books",
     }, {
+        method: "get",
+        middleware: "doc.index.getBookInfo",
+        url: "/api/book/:id",
+    }, {
         url: '/test',
         method: 'get',
         middleware: 'index.action'
@@ -127,7 +131,7 @@ test('doc, get doc content', async t => {
 
 test('doc, write doc content', async t => {
     let content, apiDoc
-    
+
     apiDoc = './api.md'
     content = await doc.getContent('./tests/router/doc')
 
