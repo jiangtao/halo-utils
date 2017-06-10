@@ -1,8 +1,7 @@
 import test from 'ava'
+import { resolve, join } from 'path'
 import { rule, generateRouterMaps, doc } from '../src'
 import { existsSync, unlinkSync, readFileSync } from 'fs'
-import { resolve, join } from 'path'
-import { promisify } from 'util'
 
 test('generateRouterMaps', (t) => {
     t.deepEqual(generateRouterMaps({

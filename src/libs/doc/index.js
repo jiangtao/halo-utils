@@ -1,13 +1,13 @@
-import { isAbsolute, resolve, join, relative } from 'path'
-import { getPaths, getApiInfo, promisify } from './utils'
-
 import marked from './marked'
 import { writeFile } from 'fs'
+import { getPaths, getApiInfo, promisify } from './utils'
+import { isAbsolute, resolve, join, relative } from 'path'
 
+export async function getContent(dir) {
+    let paths, contents
 
-export async function getContent(apiDir) {
-    let paths = await getPaths(apiDir)
-    let contents = []
+    paths = await getPaths(dir)
+    contents = []
 
     for (let path of paths) {
         let apis = await getApiInfo(path)
@@ -16,16 +16,14 @@ export async function getContent(apiDir) {
             contents.push(marked(api))
         }
     }
+    
     return contents.join('\n')
 }
 
-export async function writeContent(docPath, content) {
-    return await promisify(writeFile)(getPath(docPath), content, { encoding: 'utf8', flag: 'w' })
+export async function writeContent(path, content) {
+    return await promisify(writeFile)(toAbsolutePath(path), content, { encoding: 'utf8', flag: 'w' })
 }
 
-function getPath(path) {
+function toAbsolutePath(path) {
     return isAbsolute(path) ? path : resolve(join(process.cwd(), path))
 }
-
-
-

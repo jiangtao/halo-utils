@@ -1,6 +1,6 @@
-import { parse } from 'babylon'
 import glob from 'glob'
 import { readFile } from 'fs'
+import { parse } from 'babylon'
 
 export async function getPaths(src) {
     return await promisify(glob)(`${src}/**/*.js`, { realpath: true })
@@ -28,7 +28,6 @@ export function promisify(fn) {
 async function getContent(path) {
     return await promisify(readFile)(path, 'utf-8')
 }
-
 
 function getDecorators(ast) {
     let type = ast.find(node => node.declaration && node.declaration.type === 'ClassDeclaration')
@@ -67,12 +66,14 @@ function extractDecorator(dec) {
 
 function getComment(dec) {
     let v
+
     if (dec.leadingComments) {
         v = dec.leadingComments.find(comment => ['CommentLine', 'CommentBlock'].includes(comment.type))
         v = v.value
     } else {
         v = ''
     }
+    
     return v
 }
 
@@ -107,4 +108,3 @@ function parseCodeToAst(code) {
         ]
     }).program.body
 }
-

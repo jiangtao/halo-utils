@@ -1,6 +1,6 @@
 {
   "name": "halo-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/halojs/halo-utils"
@@ -24,7 +24,9 @@
     "koa": "^2.2.0",
     "koa-mount": "^3.0.0",
     "nyc": "^10.2.0",
-    "request": "^2.81.0"
+    "ava": "^0.19.1",
+    "request": "^2.81.0",
+    "istanbul-lib-instrument": "^1.7.2"
   },
   "babel": {
     "plugins": [
@@ -44,10 +46,7 @@
     ]
   },
   "dependencies": {
-    "ava": "^0.19.1",
     "babylon": "^6.17.2",
-    "color-convert": "^1.9.0",
-    "glob": "^7.1.2",
-    "istanbul-lib-instrument": "^1.7.2"
+    "glob": "^7.1.2"
   }
 }

@@ -5,8 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getPaths = getPaths;
 exports.getApiInfo = getApiInfo;
-
-var _babylon = require('babylon');
+exports.promisify = promisify;
 
 var _glob = require('glob');
 
@@ -14,12 +13,12 @@ var _glob2 = _interopRequireDefault(_glob);
 
 var _fs = require('fs');
 
-var _util = require('util');
+var _babylon = require('babylon');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 async function getPaths(src) {
-    return await (0, _util.promisify)(_glob2.default)(`${src}/**/*.js`, { realpath: true });
+    return await promisify(_glob2.default)(`${src}/**/*.js`, { realpath: true });
 }
 
 async function getApiInfo(path) {
@@ -27,8 +26,22 @@ async function getApiInfo(path) {
     return getDecoratorsInfo(getDecorators(parseCodeToAst(content)));
 }
 
+function promisify(fn) {
+    return (...args) => {
+        return new Promise((resolve, reject) => {
+            return fn.apply(fn, [...args, (err, res) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(res);
+            }]);
+        });
+    };
+}
+
 async function getContent(path) {
-    return await (0, _util.promisify)(_fs.readFile)(path, 'utf-8');
+    return await promisify(_fs.readFile)(path, 'utf-8');
 }
 
 function getDecorators(ast) {
@@ -68,12 +81,14 @@ function extractDecorator(dec) {
 
 function getComment(dec) {
     let v;
+
     if (dec.leadingComments) {
         v = dec.leadingComments.find(comment => ['CommentLine', 'CommentBlock'].includes(comment.type));
         v = v.value;
     } else {
         v = '';
     }
+
     return v;
 }
 
