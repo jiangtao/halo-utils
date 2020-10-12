@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 function marked(api) {
-    return `### ${api.url}
+    return `### 接口地址: ${api.url}
     
 请求类型: ${api.method}
 
