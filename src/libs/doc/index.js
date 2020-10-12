@@ -11,7 +11,7 @@ export async function getContent(dir) {
 
     for (let path of paths) {
         let apis = await getApiInfo(path)
-        contents.push(`## ${relative(process.cwd(), path)}\n`)
+        contents.push('\n')
         for (let api of apis) {
             contents.push(marked(api))
         }

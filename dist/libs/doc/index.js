@@ -26,7 +26,7 @@ async function getContent(dir) {
 
     for (let path of paths) {
         let apis = await (0, _utils.getApiInfo)(path);
-        contents.push(`## ${(0, _path.relative)(process.cwd(), path)}\n`);
+        contents.push('\n');
         for (let api of apis) {
             contents.push((0, _marked2.default)(api));
         }
