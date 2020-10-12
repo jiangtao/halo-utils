@@ -17,13 +17,14 @@ ${getParams(api.params)}
 
 function getParams(params) {
     let combination = [];
+    let rules = { '*': '' };
 
     if (params.length == 0) {
         return '无';
     } else {
-        combination.push('参数 | 规则');
-        combination.push('---- | ---');
-        combination = combination.concat(params.map(param => `${param[0]} | ${param[1]}`));
+        combination.push('参数 | 规则 | 描述');
+        combination.push('---- | --- | ---');
+        combination = combination.concat(params.map(param => `${param[0]} | ${param[1] in rules ? rules[param[1]] : param[1]} | ${param[2]}`));
         return combination.join('\n');
     }
 }
